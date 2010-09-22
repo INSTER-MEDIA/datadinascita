@@ -23,15 +23,19 @@ class UploadHandler(blobstore_handlers.BlobstoreUploadHandler):
             stringReader = csv.reader(StringIO(csv_file))
 
             for row in stringReader:
-                logging.info(row)
-                p = Person(name=row[1].decode('utf-8'))
-                p.owner = users.get_current_user()
-                p.birthday = datetime.date(datetime.strptime(row[0], "%m/%d/%Y"))
-                p.put()
+            #            Very ugly
+            #            TODO: Optimize, remove redundant datastore queries
+                people = Person.all().filter("owner =", users.get_current_user())
+                if people.filter("name =", row[1].decode('utf-8')).count() == 0:
+                    p = Person(name=row[1].decode('utf-8'))
+                    p.owner = users.get_current_user()
+                    p.birthday = datetime.date(datetime.strptime(row[0], "%m/%d/%Y"))
+                    p.put()
 
             self.redirect('/')
         except:
-            self.redirect('/upload_failure/')
+            self.redirect('upload_failure')
+
 
 class fail(webapp.RequestHandler):
     def get(self):
