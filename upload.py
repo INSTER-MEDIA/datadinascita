@@ -16,7 +16,7 @@ class UploadHandler(blobstore_handlers.BlobstoreUploadHandler):
         try:
             upload_files = self.get_uploads('file')
             blob_info = upload_files[0]
-            if blob_info.size > 1048576:
+            if blob_info.size > 1048576: # 1Mb
                 self.redirect('/upload_failure')
 
             csv_file = fetch_data(blob_info, 0, blob_info.size + 1)
