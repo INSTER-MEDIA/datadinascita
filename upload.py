@@ -39,7 +39,9 @@ class fail(webapp.RequestHandler):
             <html>
             <body>
                 <h1 style="color: Red;">Failed</h1>
-                <p>Possibly, file is too big or not csv ('12/31/1970', 'Person name'\r\n, etc)</p>
+                <p>Possibly, file is too big or not csv</p>
+				<p>Valid csv:</p>
+				<p><img src="/images/import.png" alt="Import" border="0" /></p>
                 <a href="/import/">Try again</a>
             <body>
             <html>
