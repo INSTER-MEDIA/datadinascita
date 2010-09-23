@@ -1,4 +1,6 @@
 import logging
+#import json
+
 from datetime import *
 
 from datadinascita.birthdays.models import Person
@@ -9,10 +11,35 @@ from google.appengine.ext import blobstore
 
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect, HttpResponse
+from django.utils import simplejson
 import csv
 
 def test(request):
     return render_to_response('test.html', {})
+
+def ext(request):
+    return render_to_response('ext_list.html', {})
+
+def json_list(request):
+    if not users.get_current_user():
+        return HttpResponseRedirect(users.create_login_url('/json_list'))
+
+    people = modify_people(Person.all().filter("owner =", users.get_current_user()))
+    logging.info(people)
+    p = []
+
+    response = HttpResponse(mimetype='application/json; charset="utf-8"')
+    #    response.headers()
+    for person in people:
+        p.append({'birthday':"%s/%s/%s" % (person.birthday.month, person.birthday.day, person.birthday.year),
+                  'age': person.age,
+                  'days': person.next_bd,
+                  'name':
+                  person.name})
+
+    logging.info(p)
+    response.content = simplejson.dumps(p)
+    return response
 
 def search(request):
     return render_to_response('search.html', {})

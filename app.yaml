@@ -7,6 +7,9 @@ handlers:
 - url: /stylesheets
   static_dir: stylesheets
 
+- url: /js
+  static_dir: js
+
 - url: /images/(.*\.(gif|png|jpg|ico))
   static_files: static/\1
   upload: static/(.*\.(gif|png|jpg|ico))
