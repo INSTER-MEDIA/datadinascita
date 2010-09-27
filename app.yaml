@@ -4,12 +4,16 @@ runtime: python
 api_version: 1
 
 handlers:
-- url: /stylesheets
-  static_dir: stylesheets
+- url: /css
+  static_dir: css
 
 - url: /images/(.*\.(gif|png|jpg|ico))
-  static_files: static/\1
-  upload: static/(.*\.(gif|png|jpg|ico))
+  static_files: images/\1
+  upload: images/(.*\.(gif|png|jpg|ico))
+
+- url: /js/(.*\.js)
+  static_files: js/\1
+  upload: js/(.*\.js)
 
 - url: /upload(.*)
   script: upload.py
