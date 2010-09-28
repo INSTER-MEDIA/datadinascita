@@ -11,9 +11,6 @@ from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect, HttpResponse
 import csv
 
-def test(request):
-    return render_to_response('test.html', {})
-
 def search(request):
     return render_to_response('search.html', {})
 

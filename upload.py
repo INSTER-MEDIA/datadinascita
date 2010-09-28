@@ -20,6 +20,7 @@ class UploadHandler(blobstore_handlers.BlobstoreUploadHandler):
 
             csv_file = fetch_data(blob_info, 0, blob_info.size + 1)
             stringReader = csv.reader(StringIO(csv_file))
+#            TODO: clean up blobstore, or save reference to it
 
             for row in stringReader:
             #            Very ugly

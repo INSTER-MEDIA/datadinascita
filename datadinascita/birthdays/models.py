@@ -7,6 +7,3 @@ class Person(db.Model):
     birthday = db.DateProperty()
     owner = db.UserProperty()
 
-class PhotoItem(db.Model):
-    name = db.StringProperty()
-    photo = blobstore.BlobReferenceProperty()
