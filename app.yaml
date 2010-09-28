@@ -19,7 +19,7 @@ handlers:
   script: upload.py
 
 - url: /test(.*)
-  script: upload.py
+  script: test.py
 
 - url: /.*
   script: main.py

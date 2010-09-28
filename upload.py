@@ -4,7 +4,6 @@ from google.appengine.ext.webapp import blobstore_handlers
 from google.appengine.ext.webapp.util import run_wsgi_app
 from datadinascita.birthdays.models import Person
 
-import logging
 from google.appengine.ext.blobstore.blobstore import fetch_data
 from StringIO import StringIO
 import csv
@@ -51,13 +50,9 @@ class fail(webapp.RequestHandler):
             <html>
                                 ''')
 
-class test(webapp.RequestHandler):
-    def get(self):
-        self.response.out.write('Test')
 
 application = webapp.WSGIApplication([
                                              ('/upload_csv/', UploadHandler),
-                                             ('/test/', test),
                                              ('/upload_failure/', fail),
                                              ], debug=True)
 
