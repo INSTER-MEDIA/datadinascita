@@ -1,4 +1,4 @@
-application: ibirthweb
+application: datadinascita
 version: ibirthweb-master-1
 runtime: python
 api_version: 1
@@ -10,6 +10,10 @@ handlers:
 - url: /images/(.*\.(gif|png|jpg|ico))
   static_files: images/\1
   upload: images/(.*\.(gif|png|jpg|ico))
+
+- url: /favicon\.ico
+  static_files: images/favicon.ico
+  upload: images/favicon.ico
 
 - url: /js/(.*\.js)
   static_files: js/\1
