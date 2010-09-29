@@ -11,6 +11,9 @@
             {% for person in people %}
                 <tr>
                     <td>
+                        <a href="/edit/{{ person.key }}">Edit</a>
+                    </td>
+                    <td>
                         <h4>
                             {{ person.name }}
                         </h4>

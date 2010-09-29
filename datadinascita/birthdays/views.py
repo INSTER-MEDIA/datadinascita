@@ -11,6 +11,10 @@ from datadinascita.birthdays.forms import AddForm
 def index(request):
     return render_to_response('index.html', {'auth_url': get_auth_url(request.META['PATH_INFO'])})
 
+def fof(request, query):
+	"""404 pages"""
+	return render_to_response('404.html', {'query': query})
+
 def search(request):
     return render_to_response('search.html', {})
 
@@ -78,4 +82,7 @@ def add(request):
         form = AddForm()
 
     return show_new_person(form, request)
+
+def edit(request, id):
+    return render_to_response('index.html', {'query': id})
 
