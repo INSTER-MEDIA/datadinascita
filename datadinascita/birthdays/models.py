@@ -1,5 +1,4 @@
 from google.appengine.ext import db
-from google.appengine.ext import blobstore
 
 # Create your models here.
 class Person(db.Model):

@@ -57,6 +57,7 @@ Last Modified: 01-11-07
 
         <div id="navcontainer">
             <ul id="navlist">
+                <li><a href="/people">List</a></li>
                 <li><a href="/add">New</a></li>
                 <li><a href="/search">Search</a></li>
                 <li><a href="/import">Import</a></li>
@@ -69,6 +70,9 @@ Last Modified: 01-11-07
     <div id="content_wrapper">
         <div id="content_column">
             <div class="column_padding">
+
+                {% block index %}
+                {% endblock %}
 
                 {% block formadd %}
                 {% endblock %}
@@ -109,7 +113,8 @@ Last Modified: 01-11-07
 
     <div id="footer">
         <p>
-            Copyright &copy;2010 <a href="http://inster-media.com/" target="new">INSTER-MEDIA</a>, All Rights Reserved.<br/>
+            Copyright &copy;2010 <a href="http://inster-media.com/" target="new">INSTER-MEDIA</a>, All Rights
+            Reserved.<br/>
             Template courtesy of <a title="Designs By Darren - Free CSS Web Design Template"
                                     href="http://www.designsbydarren.com">Designs By Darren</a>.
         </p>

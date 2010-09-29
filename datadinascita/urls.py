@@ -1,14 +1,14 @@
 from django.conf.urls.defaults import *
 
 urlpatterns = patterns('datadinascita.birthdays.views',
-   (r'^$', 'list'),
+   (r'^$', 'index'),
    (r'^people/$', 'list'),
    (r'^add/$', 'add'),
    (r'^erase/$', 'erase'),
    (r'^search/$', 'search'),
    (r'^import/$', 'csv_upload'),
+   (r'^import_failed/$', 'import_failed'),
    (r'^export/$', 'export'),
-   (r'^upload/$', 'upload_photo'),
 )
 
 urlpatterns += patterns(

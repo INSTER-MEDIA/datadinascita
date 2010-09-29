@@ -1,1 +1,27 @@
 Birthday reminder
+
+/app
+Webapp framework home
+
+    /templates
+    Templates folder for webapp framework only
+
+/css
+Static folder for stylesheets
+
+/datadinascita
+Django project folder, home for settings and urls
+
+    /birthdays
+    Django app folder -- views, models, forms, etc
+
+    /templates
+    Django templates
+
+/images
+Static images folder
+
+/js
+Static javascripts folder
+
+

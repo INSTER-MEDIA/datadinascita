@@ -32,29 +32,13 @@ class UploadHandler(blobstore_handlers.BlobstoreUploadHandler):
                     p.birthday = datetime.date(datetime.strptime(row[0], "%m/%d/%Y"))
                     p.put()
 
-            self.redirect('/')
+            self.redirect('/people')
         except:
-            self.redirect('upload_failure')
-
-
-class fail(webapp.RequestHandler):
-    def get(self):
-        self.response.out.write('''
-            <html>
-            <body>
-                <h1 style="color: Red;">Failed</h1>
-                <p>Possibly, file is too big or not csv</p>
-				<p>Valid csv:</p>
-				<p><img src="/images/import.png" alt="Import" border="0" /></p>
-                <a href="/import/">Try again</a>
-            <body>
-            <html>
-                                ''')
+            self.redirect('/import_failed')
 
 
 application = webapp.WSGIApplication([
                                              ('/upload_csv/', UploadHandler),
-                                             ('/upload_failure/', fail),
                                              ], debug=True)
 
 def main():

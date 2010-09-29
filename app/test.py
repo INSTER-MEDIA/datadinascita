@@ -12,7 +12,7 @@ class test(webapp.RequestHandler):
         template_values = {
             'params': params,
         }
-        path = os.path.join(os.path.dirname(__file__), 'test.html')
+        path = os.path.join(os.path.dirname(__file__), 'templates/test.html')
         self.response.out.write(template.render(path, template_values))
 
 application = webapp.WSGIApplication(
@@ -26,4 +26,3 @@ def main():
 if __name__ == '__main__':
     main()
 
-  

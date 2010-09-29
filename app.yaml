@@ -16,11 +16,11 @@ handlers:
   upload: js/(.*\.js)
 
 - url: /upload(.*)
-  script: upload.py
+  script: app/upload.py
 
 - url: /test(.*)
-  script: test.py
+  script: app/test.py
 
 - url: /.*
-  script: main.py
+  script: app/main.py
 
