@@ -1,5 +1,6 @@
 from django import newforms as forms
 import re
+from datadinascita.birthdays.models import Person
 
 class AddForm(forms.Form):
     name = forms.CharField(required=True)

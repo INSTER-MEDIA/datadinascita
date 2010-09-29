@@ -84,5 +84,6 @@ def add(request):
     return show_new_person(form, request)
 
 def edit(request, id):
+    check_auth(request)
     return render_to_response('index.html', {'query': id})
 
