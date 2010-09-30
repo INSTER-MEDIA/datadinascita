@@ -1,3 +1,5 @@
+import logging
+
 __author__ = 'oleg@kossoy.com'
 
 from datetime import datetime
@@ -5,7 +7,6 @@ from datetime import datetime
 from google.appengine.api import users
 
 from django.shortcuts import render_to_response
-from django.http import HttpResponseRedirect
 
 from datadinascita.birthdays.models import Person
 
@@ -17,10 +18,6 @@ def get_auth_url(back):
         auth_url = users.create_login_url(back)
 
     return auth_url
-
-def check_auth(req):
-    if not users.get_current_user():
-        return HttpResponseRedirect(users.create_login_url(req.META['PATH_INFO']))
 
 def show_new_person(form, request):
     people = modify_people(Person.all().filter("owner =", users.get_current_user()))
