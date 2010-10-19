@@ -3,7 +3,7 @@ from django.conf.urls.defaults import *
 urlpatterns = patterns('datadinascita.birthdays.views',
    (r'^$', 'index'),
    (r'^people/$', 'people'),
-   (r'^list/$')
+   (r'^list/$', 'list'),
    (r'^add/$', 'add'),
    (r'^edit/(.*)/$', 'edit'),
    (r'^erase/$', 'erase'),

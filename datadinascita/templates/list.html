@@ -1,38 +1,32 @@
-{% extends 'base.html' %}
-{% block list %}
-    {% ifnotequal count 0 %}
-        <table width="100%">
-            <tr>
-                <th>&nbsp;</th>
-                <th>Name</th>
-                <th>Birthday</th>
-                <th>Age</th>
-                <th>Next BD</th>
-            </tr>
-            {% for person in people %}
-                <tr>
-                    <td>
-                        <a href="/edit/{{ person.key }}">Edit</a>
-                    </td>
-                    <td>
-                        <h4>
-                            {{ person.name }}
-                        </h4>
-                    </td>
-                    <td>
-                        {{ person.birthday|date:"D, jS F Y" }}
-                    </td>
-                    <td>
-                        {{ person.age }}
-                    </td>
-                    <td>
-                        {{ person.next_bd }}
-                    </td>
-                </tr>
-            {% endfor %}
-        </table>
-    {% endifnotequal %}
-{% endblock %}
-{% block links %}
-    <a href="/add">New Person</a>
-{% endblock %}
+<!doctype html>
+<html>
+<head>
+    <title>
+        List
+    </title>
+    <style type="text/css">
+        td {
+            border: 1px solid blue;
+        }
+    </style>
+</head>
+<body>
+<table>
+    {% for person in people %}
+        <tr>
+            <td>
+                <h4>
+                    {{ person.name }}
+                </h4>
+            </td>
+            <td>
+                {{ person.event.date }}
+            </td>
+            <td>
+                {{ person.event.name }}
+            </td>
+        </tr>
+    {% endfor %}
+</table>
+</body>
+</html>

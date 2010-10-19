@@ -6,6 +6,7 @@ from django.http import  HttpResponse, HttpResponseRedirect
 
 from datadinascita.birthdays.utils import *
 from datadinascita.birthdays.forms import AddForm
+from datadinascita.birthdays.models import Contact
 
 def index(request):
     return render_to_response('index.html', {'auth_url': get_auth_url(request.META['PATH_INFO'])})
@@ -22,7 +23,7 @@ def people(request):
         return HttpResponseRedirect(users.create_login_url(request.META['PATH_INFO']))
 
     people = modify_people(Person.all().filter("owner =", users.get_current_user()))
-    return render_to_response('list.html', {'people': people, 'count': len(people),
+    return render_to_response('people.html', {'people': people, 'count': len(people),
                                             'auth_url': get_auth_url(request.META['PATH_INFO'])})
 
 def export(request):
@@ -101,3 +102,10 @@ def edit(request, id):
 
     return render_to_response('index.html', {'query': id})
 
+def list(request):
+    if not users.get_current_user():
+        return HttpResponseRedirect(users.create_login_url(request.META['PATH_INFO']))
+
+    people = Contact.all()
+
+    return render_to_response('list.html', {'people': people})
