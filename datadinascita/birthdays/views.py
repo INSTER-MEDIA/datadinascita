@@ -17,7 +17,7 @@ def fof(request, query):
 def search(request):
     return render_to_response('search.html', {})
 
-def list(request):
+def people(request):
     if not users.get_current_user():
         return HttpResponseRedirect(users.create_login_url(request.META['PATH_INFO']))
 
