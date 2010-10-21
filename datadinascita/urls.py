@@ -1,9 +1,10 @@
 from django.conf.urls.defaults import *
 
 urlpatterns = patterns('datadinascita.birthdays.views',
-   (r'^$', 'index'),
+   (r'^$', 'list'),
    (r'^people/$', 'people'),
    (r'^list/$', 'list'),
+   (r'^new/$', 'new'),
    (r'^add/$', 'add'),
    (r'^edit/(.*)/$', 'edit'),
    (r'^erase/$', 'erase'),

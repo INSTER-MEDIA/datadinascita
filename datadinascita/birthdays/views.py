@@ -6,7 +6,7 @@ from django.http import  HttpResponse, HttpResponseRedirect
 
 from datadinascita.birthdays.utils import *
 from datadinascita.birthdays.forms import AddForm
-from datadinascita.birthdays.models import Contact
+from datadinascita.birthdays.models import Contact, Event
 
 def index(request):
     return render_to_response('index.html', {'auth_url': get_auth_url(request.META['PATH_INFO'])})
@@ -24,7 +24,7 @@ def people(request):
 
     people = modify_people(Person.all().filter("owner =", users.get_current_user()))
     return render_to_response('people.html', {'people': people, 'count': len(people),
-                                            'auth_url': get_auth_url(request.META['PATH_INFO'])})
+                                              'auth_url': get_auth_url(request.META['PATH_INFO'])})
 
 def export(request):
     if not users.get_current_user():
@@ -109,3 +109,44 @@ def list(request):
     people = Contact.all()
 
     return render_to_response('list.html', {'people': people})
+
+def new(request):
+    if not users.get_current_user():
+        return HttpResponseRedirect(users.create_login_url(request.META['PATH_INFO']))
+
+    params = {}
+
+    if request.method == 'POST':
+
+        event_date = datetime.date(
+                datetime.strptime(
+                        request.POST.get('date', ''),
+                        "%Y-%m-%d"
+                        )
+                )
+
+        e = Event.all().filter(
+                "type =", request.POST.get('type', '')).filter(
+                "date =", event_date
+                ).fetch(1)
+
+        if not e:
+            e = Event(
+                    type=request.POST.get('type', ''),
+                    name=request.POST.get('type', ''),
+                    date=event_date
+                    )
+            e.put()
+        else:
+            e = e[0]
+
+        contact = Contact(
+                name=request.POST.get('fullName', ''),
+                owner=users.get_current_user(),
+                event=e
+                )
+        contact.put()
+
+        return HttpResponseRedirect('/')
+
+    return render_to_response('new.html', {'params': params})
