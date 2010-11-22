@@ -106,7 +106,7 @@ def list(request):
     if not users.get_current_user():
         return HttpResponseRedirect(users.create_login_url(request.META['PATH_INFO']))
 
-    people = Contact.all()
+    people = Contact.all().filter("owner =", users.get_current_user())
 
     return render_to_response('list.html', {'people': people})
 
