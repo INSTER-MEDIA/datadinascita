@@ -12,6 +12,38 @@ A modern, full-stack birthday and event tracking application built with Django 5
 
 ---
 
+## 🚀 Quick Start
+
+**Want to run this locally right now?** → **[See QUICKSTART.md](QUICKSTART.md)**
+
+Get up and running in 5 minutes with Docker:
+
+```bash
+# 1. Clone and navigate
+git clone https://github.com/INSTER-MEDIA/datadinascita.git
+cd datadinascita
+
+# 2. Set up environment
+cp backend/.env.example backend/.env
+cp frontend/.env.example frontend/.env
+
+# 3. Generate SECRET_KEY and add to backend/.env
+python3 -c "import secrets; print('SECRET_KEY=' + secrets.token_urlsafe(50))"
+
+# 4. Start everything
+docker-compose up -d
+
+# 5. Run migrations and create admin user
+docker-compose exec backend python manage.py migrate
+docker-compose exec backend python manage.py createsuperuser
+
+# 6. Open http://localhost:5173 🎉
+```
+
+**That's it!** For detailed instructions and troubleshooting, see **[QUICKSTART.md](QUICKSTART.md)**.
+
+---
+
 ## Features
 
 ✨ **Core Features**
