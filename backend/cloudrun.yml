@@ -1,0 +1,47 @@
+# Google Cloud Run deployment configuration
+# Deploy with: gcloud run services replace cloudrun.yml
+
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: datadinascita-backend
+  labels:
+    cloud.googleapis.com/location: us-central1
+spec:
+  template:
+    metadata:
+      annotations:
+        autoscaling.knative.dev/minScale: '0'
+        autoscaling.knative.dev/maxScale: '10'
+        run.googleapis.com/execution-environment: gen2
+    spec:
+      containerConcurrency: 80
+      timeoutSeconds: 300
+      containers:
+        - image: gcr.io/PROJECT_ID/datadinascita-backend:latest
+          ports:
+            - containerPort: 8000
+          env:
+            - name: DEBUG
+              value: 'False'
+            - name: ALLOWED_HOSTS
+              value: '.run.app'
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: database-url
+                  key: latest
+            - name: SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: django-secret-key
+                  key: latest
+            - name: CORS_ALLOWED_ORIGINS
+              value: 'https://datadinascita.vercel.app'
+          resources:
+            limits:
+              memory: 512Mi
+              cpu: '1'
+  traffic:
+    - percent: 100
+      latestRevision: true
